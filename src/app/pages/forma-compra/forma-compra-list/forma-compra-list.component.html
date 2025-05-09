@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h2>Lista de Forma Compra</h2>
+    <a class="btn btn-primary mb-3" routerLink="/forma-compra/novo">Nova Forma Compra</a>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let formaCompra of formaCompras">
+          <td>{{ formaCompra.codFc }}</td>
+          <td>{{ formaCompra.descricao }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editar(formaCompra.codFc)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="excluir(formaCompra.codFc)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h2>Lista de Autores</h2>
+    <a class="btn btn-primary mb-3" routerLink="/autor/novo">Novo Autor</a>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let autor of autores">
+          <td>{{ autor.codAu }}</td>
+          <td>{{ autor.nome }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editar(autor.codAu)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="excluir(autor.codAu)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

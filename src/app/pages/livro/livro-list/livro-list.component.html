@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <h2>Lista de Livros</h2>
+    <a class="btn btn-primary mb-3" routerLink="/livro/novo">Novo Livro</a>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Edição</th>
+          <th>Ano Publicação</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let livro of livros">
+          <td>{{ livro.codL }}</td>
+          <td>{{ livro.titulo }}</td>
+          <td>{{ livro.edicao }}</td>
+          <td>{{ livro.anoPublicacao }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editar(livro.codL)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="excluir(livro.codL)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

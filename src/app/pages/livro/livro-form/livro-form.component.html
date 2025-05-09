@@ -1,0 +1,83 @@
+<form [formGroup]="livroForm" (ngSubmit)="salvar()" class="container mt-4">
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título</label>
+    <input id="titulo" formControlName="titulo" required maxlength="40" class="form-control" placeholder="Título">
+    <div *ngIf="livroForm.get('titulo')?.invalid && livroForm.get('titulo')?.touched" class="text-danger mt-1">
+      <div *ngIf="livroForm.get('titulo')?.errors?.['required']">O campo título é obrigatório.</div>
+      <div *ngIf="livroForm.get('titulo')?.errors?.['maxlength']">O título deve ter no máximo 40 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="editora" class="form-label">Editora</label>
+    <input id="editora" formControlName="editora" required maxlength="40" class="form-control" placeholder="Editora">
+    <div *ngIf="livroForm.get('editora')?.invalid && livroForm.get('editora')?.touched" class="text-danger mt-1">
+      <div *ngIf="livroForm.get('editora')?.errors?.['required']">O campo editora é obrigatório.</div>
+      <div *ngIf="livroForm.get('editora')?.errors?.['maxlength']">O editora deve ter no máximo 40 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="edicao" class="form-label">Edição</label>
+    <input id="edicao" formControlName="edicao" type="number" class="form-control" placeholder="Edição" min="1">
+    <div *ngIf="livroForm.get('edicao')?.invalid && livroForm.get('edicao')?.touched" class="text-danger mt-1">
+      <div *ngIf="livroForm.get('edicao')?.errors?.['required']">O campo Edição é obrigatório.</div>
+      <div *ngIf="livroForm.get('edicao')?.errors?.['min']">O valor deve ser maior que zero.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="anoPublicacao" class="form-label">Ano de Publicação</label>
+    <input id="anoPublicacao" formControlName="anoPublicacao" required maxlength="4" class="form-control" placeholder="Ano de Publicação">
+    <div *ngIf="livroForm.get('anoPublicacao')?.invalid && livroForm.get('anoPublicacao')?.touched" class="text-danger mt-1">
+      <div *ngIf="livroForm.get('anoPublicacao')?.errors?.['required']">O campo Ano Publicação é obrigatório.</div>
+      <div *ngIf="livroForm.get('anoPublicacao')?.errors?.['maxlength']">O Ano Publicação deve ter no máximo 4 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Assuntos</label>
+    <select formControlName="assuntos" class="form-select" multiple>
+      <option *ngFor="let assunto of assuntos" [value]="assunto.codAs">{{ assunto.descricao }}</option>
+    </select>
+    <div *ngIf="livroForm.get('assuntos')?.invalid && livroForm.get('assuntos')?.touched" class="text-danger mt-1">
+      Pelo menos um assunto deve ser selecionado.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Autores</label>
+    <select formControlName="autores" class="form-select" multiple>
+      <option *ngFor="let autor of autores" [value]="autor.codAu">{{ autor.nome }}</option>
+    </select>
+    <div *ngIf="livroForm.get('autores')?.invalid && livroForm.get('autores')?.touched" class="text-danger mt-1">
+      Pelo menos um autor deve ser selecionado.
+    </div>
+  </div>
+
+  <div formArrayName="formasCompra" class="mb-4">
+    <label class="form-label">Formas de Compra</label>
+  
+    <div *ngFor="let fc of formasCompra.controls; let i = index" [formGroupName]="i" class="row align-items-end mb-2">
+      <div class="col-md-6">
+        <select formControlName="codFc" class="form-select">
+          <option *ngFor="let forma of formasCompraDisponiveis" [value]="forma.codFc">{{ forma.descricao }}</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <input formControlName="valor" type="number" class="form-control" placeholder="Valor"  min="1">
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger" (click)="removerFormaCompra(i)">Remover</button>
+      </div>
+    </div>
+  
+    <button type="button" class="btn btn-secondary" (click)="adicionarFormaCompra()">Adicionar Forma de Compra</button>
+  
+    <div *ngIf="livroForm.get('formasCompra')?.invalid && livroForm.get('formasCompra')?.touched" class="text-danger mt-2">
+      Pelo menos uma forma de compra deve ser adicionada, com seu respectivo valor.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="livroForm.invalid">Salvar</button>
+</form>

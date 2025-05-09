@@ -1,0 +1,26 @@
+<div *ngFor="let autor of (agrupadoPorAutor | keyvalue)">
+    <h3>{{ autor.key }}</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Editora</th>
+          <th>Edição</th>
+          <th>Ano</th>
+          <th>Assuntos</th>
+          <th>Formas de Compra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let livro of autor.value">
+          <td>{{ livro.titulo }}</td>
+          <td>{{ livro.editora }}</td>
+          <td>{{ livro.edicao }}</td>
+          <td>{{ livro.anoPublicacao }}</td>
+          <td>{{ livro.assuntos }}</td>
+          <td>{{ livro.formasCompra }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

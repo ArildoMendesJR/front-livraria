@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <h2>{{ assunto.codAs ? 'Editar Assunto' : 'Novo Assunto' }}</h2>
+  
+    <form (ngSubmit)="salvar()" #form="ngForm">
+      <div class="mb-3">
+        <label class="form-label">Descrição</label>
+        <input
+          class="form-control"
+          [(ngModel)]="assunto.descricao"
+          name="descricao"
+          #descricao="ngModel"
+          required
+          maxlength="20"
+        />
+        <!-- Mensagens de validação -->
+        <div *ngIf="descricao.invalid && descricao.touched" class="text-danger mt-1">
+          <div *ngIf="descricao.errors?.['required']">O campo descrição é obrigatório.</div>
+          <div *ngIf="descricao.errors?.['maxlength']">A descrição deve ter no máximo 20 caracteres.</div>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-success" [disabled]="form.invalid">Salvar</button>
+      <a routerLink="/assunto" class="btn btn-secondary ms-2">Cancelar</a>
+    </form>
+  </div>
+  

@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h2>Lista de Assunto</h2>
+    <a class="btn btn-primary mb-3" routerLink="/assunto/novo">Novo Assunto</a>
+  
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let assunto of assuntos">
+          <td>{{ assunto.codAs }}</td>
+          <td>{{ assunto.descricao }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editar(assunto.codAs)">Editar</button>
+            <button class="btn btn-sm btn-danger" (click)="excluir(assunto.codAs)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
